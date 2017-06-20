@@ -1,21 +1,66 @@
-class Heap:
-    def __init__(size):
-        self.size=size
-        self.heap=[None]*size
+
+
+#Code for heap 
+
+def leftChild(i):
+    return 2*i+1
+
+def parent(i):
+    return i//2
+
+def rightChild(i):
+    return 2*i+2
+
+
+
+def heapify(arr,i,heapSize):
+    #print("called for",arr,i)
+    left=leftChild(i)
+    right=rightChild(i)
+    largest=i
+    if left<heapSize and arr[left]>arr[i]:
+        largest=left
+
+    else:
+        largest=i
+
+
+    if right<heapSize and arr[right]>arr[largest]:
+        largest=right
+
+
+    if(largest!=i):
+        arr[largest],arr[i]=arr[i],arr[largest]
+        heapify(arr,largest,heapSize)
+
+    
+def buildHeap(arr):
+    
+    for i in range((len(arr)-1)//2,-1,-1):
         
+        heapify(arr,i,len(arr))
+
+
+
+def heapSort(arr):
+    heapSize=len(arr)
+    buildHeap(arr)
+    for i in range(len(arr)-1,0,-1):
     
-    def insert(item):
-        pass
+        arr[0],arr[i]=arr[i],arr[0]
+        heapSize-=1
+        heapify(arr,0,heapSize)
 
-    def search(key):
-        pass
 
-    def delete(item):
-        pass
+arr=[27,17,3,16,13,10,1,5,7,12,4,8,9,0]
+
+heapSort(arr)
+print(arr)
+        
 
     
 
-
+#######################################################################
 
 
 
@@ -126,7 +171,7 @@ def mergeSort(arr):
     
         
 
-
-arr=[9,8,7,6,5,4,3,2,1]
-mergeSort(arr)
-print(arr)
+##
+##arr=[9,8,7,6,5,4,3,2,1]
+##mergeSort(arr)
+##print(arr)
